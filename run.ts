@@ -5,7 +5,7 @@ import * as path from 'path';
 
 export class Files {
 
-    public readonly files : string[] = [
+    public readonly files: string[] = [
         "RMenu.lua",
         "menu/RageUI.lua",
         "menu/Menu.lua",
@@ -39,10 +39,10 @@ export class Files {
 
     public onBuild = (): void => {
         // https://stackoverflow.com/questions/5827612/node-js-fs-readdir-recursive-directory-search
-        const fetchDir = function (dir) {
-            let results = [];
+        const fetchDir = function (dir: any) {
+            let results: any = [];
             let files = fs.readdirSync(dir);
-            files.forEach(function(file) {
+            files.forEach(function (file) {
                 file = path.resolve(dir, file);
                 let stat = fs.statSync(file);
                 if (stat && stat.isDirectory()) {
@@ -54,9 +54,9 @@ export class Files {
             });
             return results;
         };
-        const fetchFiles = function (dir, files, done) {
+        const fetchFiles = function (dir: any, files: any, done: any) {
             let pending = files.length;
-            let results = [];
+            let results: any = [];
             for (var index in files) {
                 let file = path.resolve(dir, files[index]);
                 let stat = fs.statSync(file);
@@ -69,9 +69,9 @@ export class Files {
             }
             done(null, results);
         };
-        fetchFiles(`${this.directory}`, this.files, function (err, results) {
+        fetchFiles(`${this.directory}`, this.files, function (err: any, results: any) {
             if (err) throw err;
-            results.forEach(function (x) {
+            results.forEach(function (x: any) {
                 let contents = fs.readFileSync(x, 'utf8')
                 filesystem.appendFileSync("../src/RageShared.lua", contents, 'utf8');
             });
