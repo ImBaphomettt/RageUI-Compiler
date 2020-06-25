@@ -19,18 +19,18 @@ export class Files {
 
     public readonly directory: string = "RageUI/src/client";
 
-    public readonly filename: string = "RageShared.lua";
+    public readonly filename: string = "./RageShared.lua";
 
 
     public onInit = (): void => {
-        filesystem.exists(`${this.directory}${this.filename}`, (exists) => {
+        filesystem.exists(`${this.filename}`, (exists) => {
             if (exists)
-                filesystem.remove(`${this.directory}${this.filename}`, () => console.log("File deleted successfully, Start generate process."));
+                filesystem.remove(`${this.filename}`, () => console.log("File deleted successfully, Start generate process."));
             else
                 console.log("File not exists")
         });
-        filesystem.ensureFile(`${this.directory}${this.filename}`).then(() => {
-            console.info('Create file successfully : ' + `${this.directory}${this.filename}`);
+        filesystem.ensureFile(`${this.filename}`).then(() => {
+            console.info('Create file successfully : ' + `${this.filename}`);
             this.onBuild();
         }).catch(error => {
             console.error(error);
@@ -73,7 +73,7 @@ export class Files {
             if (err) throw err;
             results.forEach(function (x: any) {
                 let contents = fs.readFileSync(x, 'utf8')
-                filesystem.appendFileSync("../src/RageShared.lua", contents, 'utf8');
+                filesystem.appendFileSync("RageShared.lua", contents, 'utf8');
             });
         });
     };
