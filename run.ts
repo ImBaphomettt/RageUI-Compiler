@@ -17,7 +17,7 @@ export class Files {
         "menu/windows/",
     ];
 
-    public readonly directory: string = "../src/";
+    public readonly directory: string = "RageUI/src/client";
 
     public readonly filename: string = "RageShared.lua";
 
